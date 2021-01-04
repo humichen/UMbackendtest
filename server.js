@@ -6,6 +6,7 @@ const MONGODB_ATLAS_URL = "mongodb+srv://admin:ntuedtd@cluster0.j51e3.mongodb.ne
 const itemRouter = require("./routers/itemRouter");
 const userRouter = require("./routers/userRouter");
 const reservedRouter = require("./routers/reservedRouter");
+require("dotenv").config();
 
 mongoose.connect(MONGODB_ATLAS_URL, {
   useNewUrlParser: true,
@@ -24,7 +25,7 @@ app.use("/api/users", userRouter);
 app.use("/api/reserved", reservedRouter);
 
 app.get("/", (req, res) => {
-  res.send("Server is ready");
+  res.send(process.env.PORT);
 });
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
